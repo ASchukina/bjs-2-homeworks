@@ -10,7 +10,10 @@ class AlarmClock {
 
         } else if (this.alarmCollection.find(alarm => alarm.time === time)) {
             console.warn('Уже присутствует звонок на это же время');
-            return;
+            this.alarmCollection.push({
+                time,
+                callback,
+                canCall: true});
 
         } else {
             this.alarmCollection.push({
@@ -27,7 +30,7 @@ class AlarmClock {
 
     getCurrentFormattedTime() {
         return new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      }
+    }
 
     start() {
         // останавливаемся, если будильник уже запущен
